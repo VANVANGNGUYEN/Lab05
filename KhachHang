@@ -1,0 +1,39 @@
+public class KhachHang {
+    private String soCMND;
+    private  String TenKhachHang;
+    private String Gaden;
+    private double Giatien;
+    
+    public KhachHang(String soCMND,String TenKhachHang,String Gaden,double Giatien) {
+        this.soCMND=soCMND;
+        this.TenKhachHang = TenKhachHang;
+        this.Gaden=Gaden;
+        this.Giatien=Giatien;
+    }
+    public String getsoCMND() {
+        return soCMND;
+    }
+    public void setsoCMND(String soCMND) {
+        this.soCMND=soCMND;
+    }
+     public String getTenKhachHang() {
+        return TenKhachHang;
+    }
+    public void setTenKhachHang(String TenKhachHang) {
+        this.TenKhachHang=TenKhachHang;
+    }
+      public String getGaden() {
+        return Gaden;
+    }
+    public void setGaden(String Gaden) {
+        this.Gaden=Gaden;
+    }
+      public double getGiatien() {
+        return Giatien;
+    }
+    public void setGiatien(double Giatien) {
+        this.Giatien=Giatien;
+    }
+         
+    
+}
