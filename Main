@@ -1,0 +1,142 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        QuanLyPhongHoc quanLyPhongHoc = new QuanLyPhongHoc();
+        Scanner scanner = new Scanner(System.in);
+        int luaChon;
+
+        do {
+            System.out.println("----- MENU -----");
+            System.out.println("1. Them phong hoc");
+            System.out.println("2. Hien thi danh sach cac phong hc");
+            System.out.println("3. Hien thi danh sach cac phong hoc dat chuan");
+            System.out.println("4. Sap xep danh sach cac phong hoc theo day nha tang dan");
+            System.out.println("5. Sap xep danh sách cac phong hoc theo dien tich giam dan");
+            System.out.println("6. Sap xep danh sach cac phong hoc theo so bong đen tang dan");
+            System.out.println("7. Cap nhat so may tinh cua mot phong hoc");
+            System.out.println("8. Xoa phong hoc");
+            System.out.println("9. Tong so phong hoc");
+            System.out.println("10. Hien thi danh sach cac phong hoc co so may tinh cho trưoc");
+            System.out.println("0. Thoat");
+
+            System.out.print("Nhap lua chon cua ban: ");
+            luaChon = scanner.nextInt();
+            scanner.nextLine(); 
+
+            switch (luaChon) {
+                case 1:
+                    System.out.println("----- Them phong hoc -----");
+                    System.out.print("Nhap ma phong: ");
+                    String maPhong = scanner.nextLine();
+                    System.out.print("Nhap day nha: ");
+                    String dayNha = scanner.nextLine();
+                    System.out.print("Nhap dien tich: ");
+                    double dienTich = scanner.nextDouble();
+                    System.out.println("1. Phong ly thuyet");
+                    System.out.println("2. Phong may tinh");
+                    System.out.println("3. Phong thi nghiem");
+                    System.out.print("Chon loai phong: ");
+                    int loaiPhong = scanner.nextInt();
+                    scanner.nextLine(); // Đọc bỏ dòng new line
+
+                    PhongHoc phongHoc;
+
+                    switch (loaiPhong) {
+                        case 1:
+                            System.out.print("Nhap so ghe: ");
+                            int soGhe = scanner.nextInt();
+                            System.out.print("Co may chieu (true/false): ");
+                            boolean coMayChieu = scanner.nextBoolean();
+                            phongHoc = new PhongLyThuyet(maPhong, dayNha, dienTich, soGhe, coMayChieu);
+                            break;
+                        case 2:
+                            System.out.print("Nhap so may tinh: ");
+                            int soMayTinh = scanner.nextInt();
+                            phongHoc = new PhongMayTinh(maPhong, dayNha, dienTich, soMayTinh);
+                            break;
+                        case 3:
+                            scanner.nextLine(); // Đọc bỏ dòng new line
+                            System.out.print("Nhap mon hoc: ");
+                                                        String monHoc = scanner.nextLine();
+                            System.out.print("Nhap so lưong ban thi nghiem: ");
+                            int soBanThiNghiem = scanner.nextInt();
+                            System.out.print("Co thiet bi dacc biet (true/false): ");
+                            boolean coThietBiDacBiet = scanner.nextBoolean();
+                            phongHoc = new PhongThiNghiem(maPhong, dayNha, dienTich, soBanThiNghiem, monHoc, soBanThiNghiem, coThietBiDacBiet);
+                            break;
+                        default:
+                            System.out.println("Lua chon khong hop le!");
+                            continue; // Tiếp tục vòng lặp
+                    }
+
+                    if (quanLyPhongHoc.themPhong(phongHoc)) {
+                        System.out.println("Them phong hoc thanh cong!");
+                    } else {
+                        System.out.println("Phong hoc da ton tai!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("----- Danh sach cac phong hoc -----");
+                    quanLyPhongHoc.inDanhSachPhong();
+                    break;
+                case 3:
+                    System.out.println("----- Danh sach cac phong hoc dat chuan -----");
+                    quanLyPhongHoc.inDanhSachPhongDatChuan();
+                    break;
+                case 4:
+                    System.out.println("----- Sap xep danh sach cac phong hoc theo day nha tang dan -----");
+                    quanLyPhongHoc.sapXepTheoDayNhaTangDan();
+                    quanLyPhongHoc.inDanhSachPhong();
+                    break;
+                case 5:
+                    System.out.println("----- Sap xep danh sach cac phong hoc theo dien tich giam dan -----");
+                    quanLyPhongHoc.sapXepTheoDienTichGiamDan();
+                    quanLyPhongHoc.inDanhSachPhong();
+                    break;
+                case 6:
+                    System.out.println("----- Sap xep danh sach cac phong hoc theo so bong den tang dan -----");
+                    quanLyPhongHoc.sapXepTheoSoBongDenTangDan();
+                    quanLyPhongHoc.inDanhSachPhong();
+                    break;
+                case 7:
+                    System.out.println("----- Cap nhat so may tinh cua mot phong hoc -----");
+                    System.out.print("Nhap ma phong: ");
+                    String maPhongCapNhat = scanner.nextLine();
+                    System.out.print("Nhap so may tinh moi: ");
+                    int soMayTinhCapNhat = scanner.nextInt();
+                    quanLyPhongHoc.capNhatSoMayTinh(maPhongCapNhat, soMayTinhCapNhat);
+                    System.out.println("Cap nhat so may tinh thanh cong!");
+                    break;
+                case 8:
+                    System.out.println("----- Xoa phong hoc -----");
+                    System.out.print("Nhap ma phong: ");
+                    String maPhongXoa = scanner.nextLine();
+                    if (quanLyPhongHoc.xoaPhong(maPhongXoa)) {
+                        System.out.println("Xoa phong hoc thanh cong!");
+                                            } else {
+                        System.out.println("Khong tim thay phong hoc!");
+                    }
+                    break;
+                case 9:
+                    System.out.println("----- Tong so phong hoc -----");
+                    System.out.println("Tong so phong hoc: " + quanLyPhongHoc.tongSoPhongHoc());
+                    break;
+                case 10:
+                    System.out.println("----- Danh sach cac phong hoc co so may tinh cho trưoc -----");
+                    System.out.print("Nhap so may tinh: ");
+                    int soMayTinhTimKiem = scanner.nextInt();
+                    quanLyPhongHoc.inDanhSachPhongMay(soMayTinhTimKiem);
+                    break;
+                case 0:
+                    System.out.println("----- Ket thuc chương trinh -----");
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le!");
+                    break;
+            }
+        } while (luaChon != 0);
+
+        scanner.close();
+    }
+}
